@@ -1,0 +1,27 @@
+function pow 2
+    push constant 1
+    pop local 0       // local 0 = resultado (inicializa com 1)
+    push argument 1
+    pop local 1       // local 1 = contador (expoente)
+    
+label loop
+    push constant 0
+    push local 1
+    eq                // verifica se contador == 0
+    if-goto end       // se sim, termina
+    
+    push local 0
+    push argument 0
+    call mult 2       // resultado = resultado * base
+    pop local 0
+    
+    push local 1
+    push constant 1
+    sub               // contador = contador - 1
+    pop local 1
+    
+    goto loop
+    
+label end
+    push local 0      // retorna o resultado
+    return

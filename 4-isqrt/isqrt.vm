@@ -1,3 +1,40 @@
 function isqrt 2
-
-
+    push constant 0
+    pop local 0       // local 0 = candidato (começa em 0)
+    push constant 0
+    pop local 1       // local 1 = quadrado do candidato
+    
+label loop
+    push local 1
+    push argument 0
+    gt                // verifica se candidato² > n
+    if-goto end       // se sim, encontrou
+    
+    push local 1
+    push argument 0
+    eq                // verifica se candidato² == n
+    if-goto found     // se sim, é raiz exata
+    
+    // incrementa candidato
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    
+    // calcula novo quadrado: (candidato)²
+    push local 0
+    push local 0
+    call mult 2
+    pop local 1
+    
+    goto loop
+    
+label found
+    push local 0      // retorna candidato (raiz exata)
+    return
+    
+label end
+    push local 0
+    push constant 1
+    sub               // retorna candidato - 1 (parte inteira)
+    return

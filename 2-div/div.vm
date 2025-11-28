@@ -1,0 +1,27 @@
+function div 2
+    push constant 0
+    pop local 0       // local 0 = quociente (resultado)
+    push argument 0
+    pop local 1       // local 1 = resto (dividendo)
+    
+label loop
+    push local 1
+    push argument 1
+    lt                // verifica se resto < divisor
+    if-goto end       // se sim, termina
+    
+    push local 1
+    push argument 1
+    sub               // resto = resto - divisor
+    pop local 1
+    
+    push local 0
+    push constant 1
+    add               // quociente = quociente + 1
+    pop local 0
+    
+    goto loop
+    
+label end
+    push local 0      // retorna o quociente
+    return
